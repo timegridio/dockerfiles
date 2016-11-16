@@ -12,7 +12,9 @@
 
 ## Running your local timegrid image
 
-    $ docker run -p8000:8000 timegrid:latest
+    # docker run -p8000:8000 -v ~/timegrid/:/var/www/timegrid timegrid:latest
+
+Change `~/timegrid/` to your timegrid codebase path in your host machine.
 
 You should be ready to browse `http://localhost:8000` with your fresh timegrid install.
 
