@@ -2,15 +2,19 @@
 
 ## Building an image
 
+> Estimated time: 10 min
+
     $ git clone https://github.com/timegridio/dockerfiles.git
     
     $ cd dockerfiles
 
 	# docker build -t timegrid .
 
-> Build may take a few minutes.
+> Coffee time!
 
 ## Running your local timegrid image
+
+> Estimated time: just seconds
 
     # docker run -p8000:8000 -v ~/timegrid/:/var/www/timegrid timegrid:latest
 
@@ -19,6 +23,8 @@ Change `~/timegrid/` to your timegrid codebase path in your host machine.
 You should be ready to browse `http://localhost:8000` with your fresh timegrid install.
 
 ## Running tests in your container
+
+> Estimated time: a few minutes
 
     # docker ps
 
