@@ -28,7 +28,8 @@ RUN composer install
 
 RUN cp .env.example .env && mkdir /tmp/timegrid_storage
 
-RUN sed -i -e 's/^DB_HOST.*/DB_HOST="127.0.0.1"/g' -e 's/^DB_DATABASE.*/DB_DATABASE="timegrid_dev"/g' -e 's/^DB_USERNAME.*/DB_USERNAME="timegrid_dev"/g' -e 's/^DB_PASSWORD.*/DB_PASSWORD="tgpass"/g' -e 's/^STORAGE_PATH=.*/STORAGE_PATH="\/tmp\/timegrid_storage"/g' .env
+RUN sed -i -e 's/^DB_HOST.*/DB_HOST="127.0.0.1"/g' -e 's/^DB_DATABASE.*/DB_DATABASE="timegrid_dev"/g' -e 's/^DB_USERNAME.*/DB_USERNAME="timegrid_dev"/g' -e 's/^DB_PASSWORD.*/DB_PASSWORD="tgpass"/g' -e 's/^STORAGE_PATH=.*/STORAGE_PATH="\/tmp\/timegrid_storage"/g' .env \
+    && echo "* * * * * php /var/www/timegrid/artisan schedule:run >> /dev/null 2>&1" >> /etc/crontab
 
 RUN /etc/init.d/mysql start && \
     php artisan migrate --seed --database=testing && \
