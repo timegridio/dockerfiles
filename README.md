@@ -8,7 +8,7 @@
     
     $ cd dockerfiles
 
-	# docker build -t timegrid .
+	$ sudo docker build -t timegrid --build-arg user=$(whoami) --build-arg uid=$(id -u) .
 
 > Coffee time!
 
@@ -16,29 +16,40 @@
 
 > Estimated time: just seconds
 
-    # docker run -p8000:8000 -v ~/timegrid/:/var/www/timegrid timegrid:latest
+    $ sudo docker run -p8000:8000 -v ~/timegrid/:/var/www/timegrid timegrid:latest
 
 Change `~/timegrid/` to your timegrid codebase path in your host machine.
 
-You should be ready to browse `http://localhost:8000` with your fresh timegrid install.
+Note that this shell will be kept busy for the time the container is up.
+
+You should be now ready to browse `http://localhost:8000` from your host machine
+ browser and meet your fresh timegrid install.
 
 ## Running tests in your container
 
 > Estimated time: a few minutes
 
-    # docker ps
+    $ sudo docker ps
 
 Grab the running `CONTAINER_ID` and replace it in:
 
-    # docker exec -it CONTAINER_ID bash
+    $ sudo docker exec -it -u=$(whoami) CONTAINER_ID bash
 
-Once you are logged-in, run the tests:
+Once you are logged-in into the container, run the tests:
 
     $ phpunit
 
+## Starting the webserver
+
+From inside the container shell:
+
+    $ php artisan serve --host 0.0.0.0
+
 ## Stopping the container
 
-    # docker stop CONTAINER_ID
+From any new shell
+
+    $ sudo docker stop CONTAINER_ID
 
 ## Authors
 
